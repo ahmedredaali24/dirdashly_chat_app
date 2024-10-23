@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "834707577867",
+    "project_id": "fire-learn-5388f",
+    "storage_bucket": "fire-learn-5388f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834707577867:android:a460ff83dff948833fbb0e",
+        "android_client_info": {
+          "package_name": "com.example.dirdashly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsBAnpYIXtCm2OEptv8czE8P3z_rKLVdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
