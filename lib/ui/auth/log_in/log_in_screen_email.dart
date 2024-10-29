@@ -19,16 +19,11 @@ import '../../utils/SecondaryButton.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/image_assets.dart';
 
-class LogInScreenEmail extends StatefulWidget {
+class LogInScreenEmail extends StatelessWidget {
   static const String routeName = "LogInScreenEmail";
 
   LogInScreenEmail({super.key});
 
-  @override
-  State<LogInScreenEmail> createState() => _LogInScreenEmailState();
-}
-
-class _LogInScreenEmailState extends State<LogInScreenEmail> {
   LogInScreenViewModel viewModel = LogInScreenViewModel(
       registerGoogleUseCase: injectRegisterGoogleUseCase());
 
@@ -46,9 +41,7 @@ class _LogInScreenEmailState extends State<LogInScreenEmail> {
           Navigator.of(context)
               .pushNamedAndRemoveUntil(HomeScreen.routeName, (route) => false);
         }
-        if (state == ErrorLoginState) {
-          Navigator.of(context).pop();
-        }
+
       },
       child: BackgroundImageContainer(
           child: Scaffold(

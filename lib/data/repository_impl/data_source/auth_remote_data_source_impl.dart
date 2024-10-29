@@ -23,12 +23,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
   }
 
   @override
-  Future registerByGoogle() async {
+  Future<UserCredential?> registerByGoogle() async {
     // Trigger the authentication flow
 
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
     if (googleUser == null) {
-      return;
+      return null;
     }
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
@@ -40,8 +41,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
     );
 
     // Once signed in, return the UserCredential
-    await FirebaseAuth.instance.signInWithCredential(credential);
-
-
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

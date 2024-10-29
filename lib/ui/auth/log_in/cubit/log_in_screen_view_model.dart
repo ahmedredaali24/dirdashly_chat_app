@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dirdashly/data/firebase/firebase_manger.dart';
 import 'package:dirdashly/ui/auth/log_in/cubit/states.dart';
+import 'package:dirdashly/ui/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -28,13 +29,18 @@ class LogInScreenViewModel extends Cubit<LoginStates> {
 
   ///registerByGoogle
   Future signInWithGoogle(context) async {
-    var user = await registerGoogleUseCase.invoke();
-    if (user == null) {
-      return;
+    try {
+      var user = await registerGoogleUseCase.invoke();
+
+      if (user == null) {
+        return;
+      }
+      emit(ShowLoadingState());
+      await Future.delayed(Duration(seconds: 3));
+      emit(SuccessLoginState());
+    } catch (e) {
+      print("catch_Google : $e");
     }
-    emit(ShowLoadingState());
-    await Future.delayed(Duration(seconds: 3));
-    emit(SuccessLoginState());
   }
 
   ///passwordLogin//غير مكتمل
