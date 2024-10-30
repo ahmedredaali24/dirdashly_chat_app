@@ -9,8 +9,8 @@ class AuthRepositoryImpl implements AuthRepositoryContract {
   AuthRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<MyUserEntity?> register(String email, String password) {
-    return remoteDataSource.register(email, password);
+  Future register(String email, String password,String userName) {
+    return remoteDataSource.register(email, password,userName);
   }
 
   @override

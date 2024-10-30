@@ -7,9 +7,7 @@ class RegisterUseCase {
 
   RegisterUseCase({required this.authRepositoryContract});
 
-  Future<MyUserEntity?> invoke(String email, String password) {
-    return authRepositoryContract.register(email, password);
+  Future invoke(String email, String password, String userName) {
+    return authRepositoryContract.register(email, password, userName);
   }
-
-
 }

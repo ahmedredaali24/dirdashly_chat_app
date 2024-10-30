@@ -33,7 +33,7 @@ class RegisterViewModel extends Cubit<RegisterStates> {
       try {
         Future.delayed(Duration(seconds: 2));
         var user = await registerUseCase.invoke(
-            emailController.text, passwordController.text);
+            emailController.text, passwordController.text, nameController.text);
 
         if (user == null) {
           emit(SuccessRegisterState());
