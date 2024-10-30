@@ -1,12 +1,13 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dirdashly/domin/entity/my_user_entity.dart';
+import 'package:dirdashly/data/firebase/db_firebase.dart';
+import 'package:dirdashly/data/model/my_user.dart';
 import 'package:dirdashly/domin/repository_interface/data_source/auth_remote_data_source_contract.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
   @override
-  Future<MyUserEntity?> register(String email, String password) async {
+  Future register(String email, String password, String userName) async {
     ///register by password
     var connectivityResult =
         await Connectivity().checkConnectivity(); // User defined class
@@ -17,6 +18,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
         email: email,
         password: password,
       );
+
+      ///firebase Storage
+      var user =
+          MyUser(id: credential.user!.uid, userName: userName, email: email);
+      DbFirebase.register(user);
     } else {
       print("Network error");
     }
@@ -31,6 +37,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
     if (googleUser == null) {
       return null;
     }
+
+    ///firebase Storage
+    var user = MyUser(
+        id: googleUser.id,
+        userName: googleUser.displayName ?? "Unknown",
+        email: googleUser.email);
+    DbFirebase.register(user);
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
         await googleUser.authentication;
